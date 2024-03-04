@@ -1,20 +1,15 @@
-<!-- <script type="module" src="../global.js"></script> -->
+<script>
+  import projects from "$lib/projects.json";
+  import Project from "$lib/Projects.svelte";
+</script>
 
-<!-- <header>
-  <nav>
-    <p class="class-name">MIT Vis & Society</p>
-    <div class="menu">
-      <a href="../index.html">Home</a>
-      <a href="../projects/index.html">Projects</a>
-      <a href="../contact/index.html">Contact</a>
-      <a href="https://github.com/mfchao" target="_blank">Github</a>
-    </div>
-  </nav>
-</header> -->
-
-<svelte:head>Projects</svelte:head>
+<h1>Projects</h1>
 <div class="projects">
-  <a href="a2.html" class="project-hero">
+  {#each projects as p}
+    <Project info={p} />
+  {/each}
+
+  <!-- <a href="a2.html" class="project-hero">
     <article>
       <h2>A2: Exploratory Data Analysis</h2>
       <img
@@ -24,7 +19,7 @@
       <p>Exploring Factors that Influence Housing Prices in Boston.</p>
     </article>
   </a>
-  <a href="a3.html" class="project-hero">
+ <a href="a3.html" class="project-hero">
     <article>
       <h2>A3: Visualization Design</h2>
       <img src="../images/A3/A3.png" alt="" />
@@ -128,5 +123,5 @@
       fuga quo corrupti rerum odit asperiores eveniet odio impedit, enim nulla
       maiores facilis non. Dolor iure cum quod qui soluta, fugit necessitatibus.
     </p>
-  </article>
+  </article> -->
 </div>

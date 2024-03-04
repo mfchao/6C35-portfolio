@@ -1,18 +1,18 @@
-<!-- <script type="module" src="../global.js"></script> -->
+<!-- <script type="module" src="../global.js"></script>
 
-<!-- <header>
+<header>
   <nav>
     <p class="class-name">MIT Vis & Society</p>
     <div class="menu">
       <a href="../index.html">Home</a>
       <a href="../projects/index.html">Projects</a>
-      <a href="../contact/index.html">Contact</a>
+      <a href="../contact/index.html" class="currentPage">Contact</a>
       <a href="https://github.com/mfchao" target="_blank">Github</a>
     </div>
   </nav>
 </header> -->
 
-<svelte:head>Contact</svelte:head>
+<h1>Contact</h1>
 
 <form action="mailto:chaom@mit.edu" method="POST" enctype="text/plain">
   <label for="name">Name:</label>
