@@ -8,5 +8,6 @@
     <h2>{p.title}</h2>
     <img src={p.image} alt="ProjectHero" />
     <p>{p.description}</p>
+    <p>{p.year}</p>
   </article>
 </a>

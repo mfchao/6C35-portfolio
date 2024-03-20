@@ -1,11 +1,78 @@
 <script>
   import projects from "$lib/projects.json";
   import Project from "$lib/Projects.svelte";
+  import Pie from "$lib/Pie.svelte";
+  import * as d3 from "d3";
+
+  // let pieData = [
+  //   { value: 1, label: "apples" },
+  //   { value: 2, label: "oranges" },
+  //   { value: 3, label: "mangos" },
+  //   { value: 4, label: "pears" },
+  //   { value: 5, label: "limes" },
+  //   { value: 5, label: "cherries" },
+  // ];
+
+  // Make sure the variable definition is *outside* the block
+  let pieData;
+
+  $: {
+    // Initialize to an empty object every time this runs
+    pieData = {};
+
+    // Calculate rolledData and pieData based on filteredProjects here
+    let rolledData = d3.rollups(
+      filteredProjects,
+      (v) => v.length,
+      (d) => d.year
+    );
+
+    pieData = rolledData.map(([year, count]) => {
+      return { value: count, label: year };
+    });
+  }
+
+  let query = "";
+
+  $: filteredByYear = projects.filter((project) => {
+    if (query) {
+      let values = Object.values(project).join("\n").toLowerCase();
+      return values.includes(query.toLowerCase());
+    }
+    if (selectedYear) {
+      return project.year === selectedYear;
+    }
+
+    return true;
+  });
+
+  $: filteredProjects = projects.filter((project) => {
+    if (query) {
+      return project.title.toLowerCase().includes(query.toLowerCase());
+    }
+
+    return true;
+  });
+
+  let selectedYearIndex = -1;
+  let selectedYear;
+  $: selectedYear =
+    selectedYearIndex > -1 ? pieData[selectedYearIndex].label : null;
 </script>
 
 <h1>Projects</h1>
+<Pie data={pieData} bind:selectedIndex={selectedYearIndex} />
+<p>Selected: {selectedYearIndex}</p>
+
+<input
+  type="search"
+  bind:value={query}
+  aria-label="Search projects"
+  placeholder="🔍 Search projects…"
+/>
+
 <div class="projects">
-  {#each projects as p}
+  {#each filteredByYear as p}
     <Project info={p} />
   {/each}
 
